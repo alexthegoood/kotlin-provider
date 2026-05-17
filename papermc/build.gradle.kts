@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.resource.factory.paper)
 }
 
-repositories {
-    mavenCentral()
+base {
+    archivesName = "kotlin-provider"
 }
 
 dependencies {
@@ -15,6 +15,7 @@ dependencies {
 }
 
 paperPluginYaml {
+    name = rootProject.name
     main = "${project.group}.kotlinProvider.KotlinProvider"
     loader = "${project.group}.kotlinProvider.KotlinProviderLoader"
     apiVersion = libs.versions.minecraft.get()

@@ -1,4 +1,4 @@
-rootProject.name = "kotlin-provider"
+rootProject.name = "build-logic"
 
 pluginManagement {
     repositories {
@@ -8,10 +8,13 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
+
     repositories {
         mavenCentral()
     }
 }
-
-include("papermc")
-includeBuild("build-logic")
