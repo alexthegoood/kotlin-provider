@@ -1,12 +1,17 @@
 plugins {
-    kotlin("jvm") version libs.versions.kotlin.get()
+    alias(libs.plugins.kotlin)
     alias(libs.plugins.paperweight.userdev)
     alias(libs.plugins.run.paper)
     alias(libs.plugins.resource.factory.paper)
+    id("bundle-to-json")
 }
 
 base {
     archivesName = "kotlin-provider"
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -21,6 +26,11 @@ paperPluginYaml {
     apiVersion = libs.versions.minecraft.get()
 
     author = "alexthegoood"
+}
+
+bundleToJson {
+    fileName = "loadData"
+    bundleName = "kotlin-libraries"
 }
 
 kotlin {

@@ -1,17 +1,7 @@
 rootProject.name = "kotlin-provider"
 
 pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-    }
-}
-
-dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-    }
+    includeBuild("build-logic")
 }
 
 include("papermc")
-includeBuild("build-logic")
