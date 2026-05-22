@@ -4,4 +4,4 @@ pluginManagement {
     includeBuild("build-logic")
 }
 
-include("papermc")
+include("kp-paper")
