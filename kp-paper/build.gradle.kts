@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.run.paper)
     alias(libs.plugins.resource.factory.paper)
     id("bundle-to-json")
+    id("maven-publish")
 }
 
 base {
@@ -41,5 +42,16 @@ tasks {
     runServer {
         minecraftVersion(libs.versions.minecraft.get())
         jvmArgs("-Xms2G", "-Xmx2G", "-Dcom.mojang.eula.agree=true")
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = rootProject.group.toString()
+            artifactId = project.name
+            version = rootProject.version.toString()
+            from(components["java"])
+        }
     }
 }
