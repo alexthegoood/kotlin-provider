@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     paperweight.paperDevBundle(libs.versions.paper.api.get())
-    compileOnly(libs.bundles.kotlin.libraries)
+    api(libs.bundles.kotlin.libraries)
 }
 
 paperPluginYaml {
