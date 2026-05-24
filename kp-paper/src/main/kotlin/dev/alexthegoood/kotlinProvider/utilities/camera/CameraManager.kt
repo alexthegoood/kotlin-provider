@@ -7,28 +7,22 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.minecraft.network.protocol.game.ClientboundPlayerRotationPacket
 import org.bukkit.entity.Player
-import kotlin.time.Duration.Companion.nanoseconds
+import kotlin.time.Duration.Companion.milliseconds
 
-class CameraManager(val player: Player) {
-    companion object {
+object CameraManager {
 
-        private val scope = CoroutineScope(Dispatchers.Default)
+    private val scope = CoroutineScope(Dispatchers.Default)
 
-        fun rotate(player: Player, yaw: Float, pitch: Float, packetsPerTick: Int = 1) {
-            scope.launch {
-                val PPT = packetsPerTick.coerceAtLeast(1)
-                val rotationPerMS = ClientboundPlayerRotationPacket(yaw/PPT, true, pitch/PPT, true)
-                val duration = (50/PPT).nanoseconds
-                val connection = player.serverPlayer.connection
-                repeat(PPT) {
-                    connection.send(rotationPerMS)
-                    delay(duration)
-                }
-            }
+    fun rotate(player: Player, yaw: Float, pitch: Float, packetsPerTick: Int = 1) = scope.launch {
+        val packetsPerTick = packetsPerTick.coerceAtLeast(1)
+        val rotationPerTick = ClientboundPlayerRotationPacket(yaw/packetsPerTick, true, pitch/packetsPerTick, true)
+        val duration = (50/packetsPerTick).milliseconds
+        val connection = player.serverPlayer.connection
+        repeat(packetsPerTick) {
+            if (!player.isOnline) return@repeat
+            connection.send(rotationPerTick)
+            if (packetsPerTick > 1) delay(duration)
         }
-
     }
 
-    fun rotate(yaw: Float, pitch: Float, packetsPerMS: Int = 1) =
-        rotate(player, yaw, pitch, packetsPerMS)
 }
