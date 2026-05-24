@@ -22,8 +22,8 @@ dependencies {
 
 paperPluginYaml {
     name = rootProject.name
-    main = "${project.group}.kotlinProvider.KotlinProvider"
-    loader = "${project.group}.kotlinProvider.KotlinProviderLoader"
+    main = "${project.group}.KotlinProvider"
+    loader = "${project.group}.KotlinProviderLoader"
     apiVersion = libs.versions.minecraft.get()
 
     author = "alexthegoood"
