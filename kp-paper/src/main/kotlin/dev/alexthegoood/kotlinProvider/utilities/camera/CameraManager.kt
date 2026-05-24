@@ -26,13 +26,13 @@ class CameraManager(val player: Player) {
 //            player.serverPlayer.connection.send(removeEntity)
 //        }
 
-        fun rotate(player: Player, yaw: Float, pitch: Float, packetsPerMS: Int = 1) {
+        fun rotate(player: Player, yaw: Float, pitch: Float, packetsPerTick: Int = 1) {
             scope.launch {
-                val PPMS = packetsPerMS.coerceAtLeast(1)
-                val rotationPerMS = ClientboundPlayerRotationPacket(yaw/PPMS, true, pitch/PPMS, true)
-                val duration = (50/PPMS).nanoseconds
+                val PPT = packetsPerTick.coerceAtLeast(1)
+                val rotationPerMS = ClientboundPlayerRotationPacket(yaw/PPT, true, pitch/PPT, true)
+                val duration = (50/PPT).nanoseconds
                 val connection = player.serverPlayer.connection
-                repeat(PPMS) {
+                repeat(PPT) {
                     connection.send(rotationPerMS)
                     delay(duration)
                 }
