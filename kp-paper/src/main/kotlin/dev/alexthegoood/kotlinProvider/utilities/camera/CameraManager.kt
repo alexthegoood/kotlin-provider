@@ -14,18 +14,6 @@ class CameraManager(val player: Player) {
 
         private val scope = CoroutineScope(Dispatchers.Default)
 
-        // it is not working
-//        fun visionType(player: Player, visionType: VisionTypes) {
-//            val entity = visionType.entityType
-//                .create(player.serverLevel, null, player.blockPos, EntitySpawnReason.COMMAND, false, false) ?: return
-//            val addEntity = ClientboundAddEntityPacket(entity, 0, player.blockPos)
-//            val setCamera = ClientboundSetCameraPacket(entity)
-//            val removeEntity = ClientboundRemoveEntitiesPacket(entity.id)
-//            player.serverPlayer.connection.send(addEntity)
-//            player.serverPlayer.connection.send(setCamera)
-//            player.serverPlayer.connection.send(removeEntity)
-//        }
-
         fun rotate(player: Player, yaw: Float, pitch: Float, packetsPerTick: Int = 1) {
             scope.launch {
                 val PPT = packetsPerTick.coerceAtLeast(1)
