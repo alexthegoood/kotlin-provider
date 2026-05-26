@@ -9,10 +9,12 @@ import kotlinx.coroutines.launch
 import net.minecraft.network.protocol.game.ClientboundPlayerRotationPacket
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import org.jetbrains.annotations.ApiStatus
 import kotlin.time.Duration.Companion.milliseconds
 
 typealias Time = Int
 
+@ApiStatus.Experimental
 fun Player.rotate(
     plugin: JavaPlugin,
     yaw: (Time) -> Float,
@@ -45,6 +47,7 @@ fun Player.rotate(
     }, retired, 1, 1)
 }
 
+@ApiStatus.Experimental
 fun Player.rotate(
     plugin: JavaPlugin,
     yaw: Float,
