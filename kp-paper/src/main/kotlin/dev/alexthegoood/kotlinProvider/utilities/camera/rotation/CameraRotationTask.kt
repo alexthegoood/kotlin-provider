@@ -3,7 +3,7 @@ package dev.alexthegoood.kotlinProvider.utilities.camera.rotation
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import org.bukkit.entity.Player
 
-abstract class CameraRotation(
+abstract class CameraRotationTask(
     val player: Player,
 ) : AutoCloseable {
 
